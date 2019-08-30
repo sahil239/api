@@ -11,7 +11,7 @@ $factory->define(Review::class, function (Faker $faker) {
         //
         'product_id' => function(){ return Product::all()->random(); },
         'customer' => $faker->name,
-        'review' => $faker->paragraph,
+        'review' => $faker->paragraph(2),
         'rating' => $faker->numberBetween(0,5)
     ];
 });

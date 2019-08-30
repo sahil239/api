@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 
+use ErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,6 +29,12 @@ trait ExceptionTrait
         if($exception instanceof NotFoundHttpException){
             return response()->json([
                 'error' => 'Incorrect Route'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if($exception instanceof ErrorException){
+            return response()->json([
+                'error' => 'Error Exception : ' . $exception->getMessage()
             ], Response::HTTP_NOT_FOUND);
         }
 
